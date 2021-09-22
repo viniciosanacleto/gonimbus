@@ -6,6 +6,12 @@ go get github.com/viniciosanacleto/gonimbus
 ### How to use
 See `example.go`:
 ```go
+import (
+"fmt"
+"github.com/viniciosanacleto/gonimbus/cache"
+"time"
+)
+
 // Create a new cache system
 cacheSystem := make(cache.CacheSystem)
 
