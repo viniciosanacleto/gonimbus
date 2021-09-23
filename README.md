@@ -1,6 +1,6 @@
 ### Installation
 ```sh
-go get github.com/viniciosanacleto/gonimbus@v0.1.1
+go get github.com/viniciosanacleto/gonimbus@v0.1.2
 ```
 
 ### How to use
