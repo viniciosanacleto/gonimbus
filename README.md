@@ -8,7 +8,7 @@ See `example.go`:
 ```go
 import (
 "fmt"
-"github.com/viniciosanacleto/gonimbus/cache"
+"cache github.com/viniciosanacleto/gonimbus/cache"
 "time"
 )
 
