@@ -16,16 +16,35 @@ func (c CacheSystem) Get(key string) interface{} {
 		return nil
 	}
 
-	c[key].CountAccess++
+	c[key].IncrementHits(1)
 
-	return c[key].Data
+	return c[key].Data()
 }
 
-func (c CacheSystem) Set(key string, data interface{}, expirationSeconds time.Duration) {
+func (c CacheSystem) GetNode(key string) *CacheNode {
+	return c[key]
+}
+
+func (c CacheSystem) Set(key string, data interface{}, expirationSeconds time.Duration) *CacheNode {
 	var cn CacheNode
-	cn.Data = data
-	cn.CreatedAt = time.Now()
-	cn.ExpireSeconds = expirationSeconds
+	cn.SetData(data)
+	cn.SetCreatedAt(time.Now())
+	cn.SetExpireSeconds(expirationSeconds)
+	cn.SetExpireHits(0)
 
 	c[key] = &cn
+	return c[key]
+}
+
+func (c CacheSystem) SetExpirationByHits(key string, nHits uint) {
+	node := c[key]
+	if node == nil {
+		return
+	}
+
+	node.SetExpireHits(nHits)
+}
+
+func (c CacheSystem) Drop(key string) {
+	c[key] = nil
 }
